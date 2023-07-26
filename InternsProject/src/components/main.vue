@@ -4,7 +4,9 @@
 </script>
 
 <template>
+    <slot></slot>
     <img :class='imageClass' src="../assets/design/stage.png"/>
+    
 </template>
 <style>
 .image{
