@@ -3,7 +3,7 @@
 
 <template>
   <v-layout class="rounded rounded-md">
-    <v-app-bar color="surface-variant" title="Application bar"></v-app-bar>
+    <v-app-bar color="surface-variant" title="Interns Project"></v-app-bar>
 
     <v-navigation-drawer>
       <v-list>
