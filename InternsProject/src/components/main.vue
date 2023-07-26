@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { ref } from 'vue'
-    const imageClass = 'image-container'
+    const imageClass = ref('image-container')
 </script>
 
 <template>

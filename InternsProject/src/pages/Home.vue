@@ -62,7 +62,9 @@ function chooseTwoArrays(data) {
 
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
       <mainscreen>
-        <ButtonTemplate />
+        <ButtonTemplate>
+         
+        </ButtonTemplate>
       </mainscreen>
 
     </v-main>
