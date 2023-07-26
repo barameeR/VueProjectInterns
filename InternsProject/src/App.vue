@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Logo from './components/Logo.vue'
 import ButtonTemplate from './components/Button.vue'
+  import mainscreen from './components/main.vue'
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import ButtonTemplate from './components/Button.vue'
     </v-app-bar>
 
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      <mainscreen/>
       <ButtonTemplate />
     </v-main>
   </v-layout>
