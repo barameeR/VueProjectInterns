@@ -2,6 +2,7 @@
 defineProps({
   btnStyle: String,
   imgSrc: String,
+  value: String,
 })
 </script>
 
@@ -10,7 +11,7 @@ defineProps({
   <button class="{{ btnStyle }}">
     <!-- <img src="../assets/design/pokeball.png" alt="Button Image"> -->
     <img :src="imgSrc" alt="Button Image">
-    PLAY
+    {{value}}
   </button>
 </template>
 <style>
@@ -23,7 +24,6 @@ defineProps({
   margin-right: 8px;
   /* Add some spacing between the image and the text */
 }
-
 .image-button {
   background-color: #3aa112;
   display: inline-flex;
@@ -33,7 +33,7 @@ defineProps({
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 250px;
+  width: 270px;
   font-size: 25pt;
   border: 5px solid #046000;
   border-radius: 100px;

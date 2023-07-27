@@ -54,7 +54,10 @@ function chooseTwoArrays(data) {
 }
 
 var btnStyle = "image-button"
-var pokemonSrc = "http://localhost:5173/src/assets/design/pokeball.png"
+var pokeballSrc = "http://localhost:5173/src/assets/design/pokeball.png"
+var pokedexSrc = "http://localhost:5173/src/assets/design/pokedex.png"
+const btnPlay = "Play"
+const btnScore = "Score"
 
 </script>
 
@@ -66,8 +69,9 @@ var pokemonSrc = "http://localhost:5173/src/assets/design/pokeball.png"
 
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
       <mainscreen>
-        <ButtonTemplate :class="btnStyle" :imgSrc="pokemonSrc">
-         
+        <ButtonTemplate :class="btnStyle" :imgSrc="pokeballSrc"  :value="btnPlay">
+        </ButtonTemplate>
+        <ButtonTemplate :class="btnStyle" :imgSrc="pokedexSrc" :value="btnScore">
         </ButtonTemplate>
       </mainscreen>
 

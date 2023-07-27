@@ -5,8 +5,9 @@
 
 <template>
     <slot></slot>
-    <img :class='imageClass' src="../assets/design/stage.png"/>
     
+    <img :class='imageClass' src="../assets/design/stage.png"/>
+
 </template>
 <style>
 .image-container {
