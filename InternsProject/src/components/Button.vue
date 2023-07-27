@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-  <!-- <button class="image-button"> -->
+<!-- <button class="image-button"> -->
   <button class="{{ btnStyle }}">
     <!-- <img src="../assets/design/pokeball.png" alt="Button Image"> -->
     <img :src="imgSrc" alt="Button Image">
@@ -39,5 +39,6 @@ defineProps({
   border-radius: 100px;
   font-weight: 900;
   color: black;
+  margin: 5px;
 }
 </style>
