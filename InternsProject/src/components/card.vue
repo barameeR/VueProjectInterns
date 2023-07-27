@@ -10,7 +10,7 @@
       ></v-img>
   
       <v-card-title>
-        {{pokemonData[0].name}}
+        {{pokemonData.name}}
       </v-card-title>
   
       <v-card-subtitle>
@@ -48,10 +48,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import type { Pokemon } from '@/model/Pokemon';
-const props = defineProps(['pokemon'])
-const pokemonData : Pokemon[] = props.pokemon
-const pokemonName = pokemonData[0].name.toLowerCase()
 
+const props = defineProps(['pokemon'])
+const pokemonData : Pokemon = props.pokemon
+const pokemonName = pokemonData.name.toLowerCase()
 const imageSrc = ref('');
 
 onMounted(async () => {
