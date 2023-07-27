@@ -52,6 +52,13 @@ function chooseTwoArrays(data) {
 
   return [partition1, partition2];
 }
+
+var btnStyle = "image-button"
+var pokeballSrc = "http://localhost:5173/src/assets/design/pokeball.png"
+var pokedexSrc = "http://localhost:5173/src/assets/design/pokedex.png"
+const btnPlay = "Play"
+const btnScore = "Score"
+
 </script>
 
 <template>
@@ -59,14 +66,20 @@ function chooseTwoArrays(data) {
     <v-app-bar color="surface-variant" height="90">
       <Logo />
     </v-app-bar>
-
+    
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      
       <mainscreen>
-        <ButtonTemplate />
+        <ButtonTemplate :class="btnStyle" :imgSrc="pokeballSrc"  :value="btnPlay">
+        </ButtonTemplate>
+        <ButtonTemplate :class="btnStyle" :imgSrc="pokedexSrc" :value="btnScore">
+        </ButtonTemplate>
       </mainscreen>
 
     </v-main>
   </v-layout>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
