@@ -66,12 +66,14 @@ const btnScore = "Score"
     <v-app-bar color="surface-variant" height="90">
       <Logo />
     </v-app-bar>
-    
+
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
-      
+
       <mainscreen>
-        <ButtonTemplate :class="btnStyle" :imgSrc="pokeballSrc"  :value="btnPlay">
-        </ButtonTemplate>
+        <router-link to="/game">
+          <ButtonTemplate :class="btnStyle" :imgSrc="pokeballSrc" :value="btnPlay">
+          </ButtonTemplate>
+        </router-link>
         <ButtonTemplate :class="btnStyle" :imgSrc="pokedexSrc" :value="btnScore">
         </ButtonTemplate>
       </mainscreen>
@@ -80,6 +82,4 @@ const btnScore = "Score"
   </v-layout>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
