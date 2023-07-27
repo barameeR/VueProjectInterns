@@ -6,7 +6,7 @@
 <template>
     <slot></slot>
     
-    <img :class='imageClass' src="../assets/design/stage.png"/>
+    <img :class='imageClass' src="../assets/design/mainbg.jpg"/>
 
 </template>
 <style>
