@@ -1,28 +1,31 @@
 <template>
     <v-card
       class="mx-auto"
-      max-width="344"
+      width="150"
     >
       <v-img
         :src = imageSrc
         height="200px"
-        cover
+        aspect-ratio="1/1"
       ></v-img>
   
       <v-card-title>
         {{pokemonData.name}}
       </v-card-title>
   
-      <v-card-subtitle>
-        1,000 miles of wonder
+      <v-card-subtitle v-if="props.playerType !='enemy'">
+        Total Power: {{pokemonData.variations[0].stats.total}}
       </v-card-subtitle>
   
       <v-card-actions>
         <v-btn
-          color="orange-lighten-2"
-          variant="text"
+        v-if="props.playerType !='enemy'"
+        color="orange-lighten-2"
+        variant="text"
+        :class="{ 'active-btn': isButtonActive }"
+        @click="toggleButtonActive"
         >
-          Explore
+          Choose
         </v-btn>
   
         <v-spacer></v-spacer>
@@ -38,7 +41,7 @@
           <v-divider></v-divider>
   
           <v-card-text>
-            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+            {{ pokemonData.variations[0].description }}
           </v-card-text>
         </div>
       </v-expand-transition>
@@ -49,15 +52,23 @@
 import { onMounted, ref } from 'vue';
 import type { Pokemon } from '@/model/Pokemon';
 
-const props = defineProps(['pokemon'])
+const { emit } = defineEmits();
+const show = ref(false)
+const props = defineProps(['pokemon','initialActive','playerType'])
 const pokemonData : Pokemon = props.pokemon
 const pokemonName = pokemonData.name.toLowerCase()
 const imageSrc = ref('');
+const isButtonActive = ref(props.initialActive)
+const toggleButtonActive = () => {
+  isButtonActive.value = !isButtonActive.value;
+  // Emit a custom event 'button-clicked' with the current active state
+  emit('button-clicked', isButtonActive.value);
+};
 
 onMounted(async () => {
   try {
     // Dynamically import the image from the assets folder
-    const imageModule = await import('@/assets/images/'+pokemonName+'.jpg');
+    const imageModule = await import(`@/assets/images/${pokemonName}.jpg`);
     // Get the default export from the dynamically imported module (the image file)
     const imageFile = imageModule.default;
     // Set the image source to the dynamically imported image file
@@ -67,3 +78,10 @@ onMounted(async () => {
   }
 });
 </script>
+
+<style scoped>
+.active-btn {
+  background-color: yellow; /* Customize the background color as you like */
+  color: black; /* Customize the text color as you like */
+}
+</style>
