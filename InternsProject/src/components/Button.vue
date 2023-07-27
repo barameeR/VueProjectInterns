@@ -2,7 +2,7 @@
 </script>
 
 <template>
-<v-btn>
+  <v-btn>
     Button
   </v-btn>
 </template>

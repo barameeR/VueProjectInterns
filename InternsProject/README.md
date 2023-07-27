@@ -33,6 +33,8 @@ npm install
 npm run dev
 ```
 
+Runing json server `json-server --watch pokemon.json`
+
 ### Type-Check, Compile and Minify for Production
 
 ```sh
