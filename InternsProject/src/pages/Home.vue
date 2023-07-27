@@ -76,21 +76,4 @@ var pokemonSrc = "http://localhost:5173/src/assets/design/pokeball.png"
 </template>
 
 <style scoped>
-/* Style the button */
-.image-button {
-  background-color: #3aa112;
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 12px;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 250px;
-  font-size: 25pt;
-  border: 5px solid #046000;
-  border-radius: 100px;
-  font-weight: 900;
-  color: black;
-}
 </style>
