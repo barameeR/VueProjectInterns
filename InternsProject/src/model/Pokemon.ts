@@ -1,3 +1,7 @@
+export interface Pokedex {
+    pokedex: Pokemon[]
+}
+
 export interface Pokemon {
     num: number;
     name: string;
