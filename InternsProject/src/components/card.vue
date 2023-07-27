@@ -40,35 +40,36 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref} from 'vue';
 import type { Pokemon } from '@/model/Pokemon';
 import pokeball from "../assets/design/stage.png";
 
-const { emit } = defineEmits();
+const emit = defineEmits();
 const show = ref(false)
-const props = defineProps(['pokemon', 'initialActive', 'playerType'])
+const props = defineProps(['pokemon', 'initialActive', 'playerType','index'])
 const pokemonData: Pokemon = props.pokemon
 const pokemonName = pokemonData.name.toLowerCase().replace(/\s+/g, '-');
 const imageSrc = ref('');
+
 const isButtonActive = ref(props.initialActive)
 const toggleButtonActive = () => {
   isButtonActive.value = !isButtonActive.value;
+  console.log(props.index)
   // Emit a custom event 'button-clicked' with the current active state
-  emit('button-clicked', isButtonActive.value);
+  emit('button-clicked', isButtonActive.value, props.index)
 };
 
 onMounted(async () => {
   try {
-    // Dynamically import the image from the assets folder
     const imageModule = await import(`@/assets/images/${pokemonName}.jpg`);
-    // Get the default export from the dynamically imported module (the image file)
     const imageFile = imageModule.default;
-    // Set the image source to the dynamically imported image file
+
     imageSrc.value = imageFile;
   } catch (error) {
-    // console.error('Error loading image:', error.message);
+    console.error('Error loading image:', error.message);
   }
 });
+
 </script>
 
 <style scoped>

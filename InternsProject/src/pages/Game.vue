@@ -10,36 +10,36 @@
     <v-row>
       <v-col v-for="(pokemon, index) in playArea" :key="index" cols="auto">
         <Suspense>
-          <card :pokemon="pokemon" playerType="playArea" :initialActive="isButtonActive"
-            @button-clicked="onButtonClicked" />
+          <card :pokemon="pokemon" playerType="playArea" />
         </Suspense>
       </v-col>
     </v-row>
     <v-row>
       <v-col v-for="(pokemon, index) in playerArray" :key="index" cols="auto">
         <Suspense>
-          <card :pokemon="pokemon" playerType="player" :initialActive="isButtonActive"
+          <card :pokemon="pokemon" playerType="player" :initialActive="isButtonActive" :index="index"
             @button-clicked="onButtonClicked" />
         </Suspense>
       </v-col>
     </v-row>
-
-
   </v-container>
 </template>
   
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue';
-import Card from '../components/card.vue'; // Correct the import path and component name if needed
+import Card from '../components/card.vue'; 
 import { getAllPokemon } from "../services/axios"
+import type { Pokedex } from '@/model/Pokemon';
 
 const playerArray = ref([])
 const computerArray = ref([])
 const playArea = ref([])
 const isButtonActive = ref(false)
-const onButtonClicked = (isActive: boolean) => {
-  // Update the active state in the parent component based on the emitted value
+const onButtonClicked = (  isActive: boolean, index: number  ) => {
   isButtonActive.value = isActive;
+  console.log(index)
+  const playerType = 'player'
+  play(index, playerType)
 };
 
 var pokeData = getAllPokemon()
@@ -61,11 +61,11 @@ function shuffleArray(array) {
   return array;
 }
 
-function calculatePower(partition) {
+function calculatePower(partition: any[]) {
   return partition.reduce((total, pokemon) => total + (pokemon.stats?.total || 0), 0);
 }
 
-function chooseTwoArrays(data) {
+function chooseTwoArrays(data: Pokedex) {
   let shuffledData = shuffleArray(data);
 
   const arraySize = 5;
@@ -90,7 +90,6 @@ function play(index: number, playerType: string) {
   if (playerType == "player") {
     playArea.value.push(playerArray.value.splice(index, 1)[0])
   } else {
-    console.log("test Plaey area enemy",);
     playArea.value.push(computerArray.value.splice(index, 1)[0]);
   }
 }
@@ -100,6 +99,8 @@ function enemyPlay() {
   console.log('AnyThing', randomIndex, computerArray.value.length, computerArray.value)
   play(computerArray.value[randomIndex], 'enemy');
 }
+
+const onSelectedPlay = () =>{}
 
 </script>
 
