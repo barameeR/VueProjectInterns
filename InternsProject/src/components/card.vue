@@ -32,23 +32,19 @@
         </div>
       </v-expand-transition>
     </v-card>
-    <v-card v-if="props.playerType == 'playArea'" class="mx-5" width="150" style="    height: 100% !important;
-    margin: auto;">
-      <v-img :src="pokeball" height="200px" aspect-ratio="1/1"></v-img>
-    </v-card>
+    <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref} from 'vue';
+import { onMounted, ref } from 'vue';
 import type { Pokemon } from '@/model/Pokemon';
-import pokeball from "../assets/design/stage.png";
 
 const emit = defineEmits();
 const show = ref(false)
-const props = defineProps(['pokemon', 'initialActive', 'playerType','index'])
+const props = defineProps(['pokemon', 'initialActive', 'playerType', 'index'])
 const pokemonData: Pokemon = props.pokemon
-const pokemonName = pokemonData.name.toLowerCase().replace(/\s+/g, '-');
+const pokemonName = pokemonData.name.toLowerCase().replace(/[\s']+|-+/g, '-');
 const imageSrc = ref('');
 
 const isButtonActive = ref(props.initialActive)
@@ -56,7 +52,7 @@ const toggleButtonActive = () => {
   isButtonActive.value = !isButtonActive.value;
   console.log(props.index)
   // Emit a custom event 'button-clicked' with the current active state
-  emit('button-clicked', isButtonActive.value, props.index)
+  emit('button-clicked', isButtonActive.value, props.index, props.playerType);
 };
 
 onMounted(async () => {
