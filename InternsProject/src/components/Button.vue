@@ -9,7 +9,7 @@ defineProps({
   <!-- <button class="image-button"> -->
   <button class="{{ btnStyle }}">
     <!-- <img src="../assets/design/pokeball.png" alt="Button Image"> -->
-    <img :src="imgSrc" alt="Button Image">
+    <img :src="imgSrc" alt="buang">
     PLAY
   </button>
 </template>

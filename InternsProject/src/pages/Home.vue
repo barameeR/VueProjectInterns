@@ -54,7 +54,7 @@ function chooseTwoArrays(data) {
 }
 
 var btnStyle = "image-button"
-var pokemonSrc = "../assets/design/pokeball.png"
+var pokemonSrc = "http://localhost:5173/src/assets/design/pokeball.png"
 
 </script>
 
