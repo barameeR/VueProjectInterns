@@ -61,7 +61,7 @@ onMounted(async () => {
     const imageFile = imageModule.default;
 
     imageSrc.value = imageFile;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error loading image:', error.message);
   }
 });
