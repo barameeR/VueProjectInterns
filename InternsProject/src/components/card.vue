@@ -1,62 +1,54 @@
 <template>
-    <v-card
-      class="mx-auto"
-      width="150"
-    >
-      <v-img
-        :src = imageSrc
-        height="200px"
-        aspect-ratio="1/1"
-      ></v-img>
-  
+  <div style="display: flex">
+    <v-card class="mx-auto" width="150">
+      <v-img :src=imageSrc height="200px" aspect-ratio="1/1"></v-img>
+
       <v-card-title>
-        {{pokemonData.name}}
+        {{ pokemonData.name }}
       </v-card-title>
-  
-      <v-card-subtitle v-if="props.playerType !='enemy'">
-        Total Power: {{pokemonData.variations[0].stats.total}}
+
+      <v-card-subtitle v-if="props.playerType == 'player'">
+        Total Power: {{ pokemonData.variations[0].stats.total }}
       </v-card-subtitle>
-  
+
       <v-card-actions>
-        <v-btn
-        v-if="props.playerType !='enemy'"
-        color="orange-lighten-2"
-        variant="text"
-        :class="{ 'active-btn': isButtonActive }"
-        @click="toggleButtonActive"
-        >
+        <v-btn v-if="props.playerType == 'player'" color="orange-lighten-2" variant="text"
+          :class="{ 'active-btn': isButtonActive }" @click="toggleButtonActive">
           Choose
         </v-btn>
-  
+
         <v-spacer></v-spacer>
-  
-        <v-btn
-          :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-          @click="show = !show"
-        ></v-btn>
+
+        <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show"></v-btn>
       </v-card-actions>
-  
+
       <v-expand-transition>
         <div v-show="show">
           <v-divider></v-divider>
-  
+
           <v-card-text>
             {{ pokemonData.variations[0].description }}
           </v-card-text>
         </div>
       </v-expand-transition>
     </v-card>
-  </template>
+    <v-card v-if="props.playerType == 'playArea'" class="mx-5" width="150" style="    height: 100% !important;
+    margin: auto;">
+      <v-img :src="pokeball" height="200px" aspect-ratio="1/1"></v-img>
+    </v-card>
+  </div>
+</template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import type { Pokemon } from '@/model/Pokemon';
+import pokeball from "../assets/design/stage.png";
 
 const { emit } = defineEmits();
 const show = ref(false)
-const props = defineProps(['pokemon','initialActive','playerType'])
-const pokemonData : Pokemon = props.pokemon
-const pokemonName = pokemonData.name.toLowerCase()
+const props = defineProps(['pokemon', 'initialActive', 'playerType'])
+const pokemonData: Pokemon = props.pokemon
+const pokemonName = pokemonData.name.toLowerCase().replace(/\s+/g, '-');
 const imageSrc = ref('');
 const isButtonActive = ref(props.initialActive)
 const toggleButtonActive = () => {
@@ -81,7 +73,9 @@ onMounted(async () => {
 
 <style scoped>
 .active-btn {
-  background-color: yellow; /* Customize the background color as you like */
-  color: black; /* Customize the text color as you like */
+  background-color: yellow;
+  /* Customize the background color as you like */
+  color: black;
+  /* Customize the text color as you like */
 }
 </style>
