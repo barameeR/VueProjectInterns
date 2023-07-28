@@ -48,12 +48,13 @@
 import { ref, onMounted } from 'vue';
 import Card from '../components/card.vue';
 import { getAllPokemon } from "../services/axios"
-import type { Pokedex } from '@/model/Pokemon';
+// import  { type Pokedex } from '@/model/Pokemon';
 import pokeball from "../assets/design/stage.png";
 import { type Pokemon } from '@/model/Pokemon';
-import JSConfetti from 'js-confetti'
+// import JSConfetti from 'js-confetti'
+import fetchDataFromJson from '@/services/fetchDataFromProject'
 
-const confetti = new JSConfetti();
+// const confetti = new JSConfetti();
 
 const playerArray = ref<Pokemon[]>([]);
 const computerArray = ref<Pokemon[]>([]);
@@ -70,24 +71,40 @@ const score = ref<number>(0);
 const gameEnd = ref(false);
 
 function gameInit() {
+  resetGameValue();
+  fetchPlayerAndComputerArrays();
+}
+
+const resetGameValue = () =>{
   playArea.value = [];
   isButtonActive.value = false;
   result.value = "";
   score.value = 0;
   gameEnd.value = false;
-  var pokeData = getAllPokemon()
-    .then((pokemonData) => {
-      const [array1, array2] = chooseTwoArrays(pokemonData);
-      playerArray.value = array1;
-      computerArray.value = array2;
-      // enemyPlay();
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
 }
 
-function shuffleArray(array) {
+const fetchPlayerAndComputerArrays = async (): Promise<void> => {
+  try {
+    let path: string = "@/assets/pokemon.json";
+    let pokemonData: Pokemon[];
+    pokemonData = await fetchDataFromJson();
+    // console.log("Pokemon data from Json",pokemonData.pokedex)
+    // pokemonData = await getAllPokemon();
+    
+    // if (process.env.NODE_ENV === 'development') {
+    //   pokemonData = await getAllPokemon();
+    // } else {
+    //   pokemonData = await fetchDataFromJson(path);
+    // }
+    const [array1, array2] = chooseTwoArrays(pokemonData);
+    playerArray.value = array1;
+    computerArray.value = array2;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+function shuffleArray(array: any) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
@@ -99,8 +116,9 @@ function calculatePower(partition: any[]) {
   return partition.reduce((total, pokemon) => total + (pokemon.stats?.total || 0), 0);
 }
 
-function chooseTwoArrays(data: Pokedex) {
+function chooseTwoArrays(data: Pokemon[]) {
   let shuffledData = shuffleArray(data);
+  console.log("Shuffle",shuffledData)
 
   const arraySize = 5;
   let partition1 = shuffledData.slice(0, arraySize);
@@ -131,8 +149,6 @@ function play(index: number, playerType: string) {
   }
 
   if (playArea.value.length > 1) {
-
-    console.log(playArea, playArea.value.length);
     var playerStat = playArea.value[0].variations[0].stats.total;
     var enemyStat = playArea.value[1].variations[0].stats.total;
 
@@ -146,7 +162,7 @@ function play(index: number, playerType: string) {
 
     if (computerArray.value.length == 0) {
       if (score.value > 2) {
-        confetti.addConfetti();
+        // confetti.addConfetti();
         gameEnd.value = true;
       }
       else {
@@ -161,14 +177,13 @@ function play(index: number, playerType: string) {
         result.value = "";
         // enemyPlay();
       }
-    }, 3000);
+    }, 1000);
   }
   console.log(playerArray, computerArray)
 }
 
 function enemyPlay() {
   const randomIndex = Math.floor(Math.random() * computerArray.value.length);
-  console.log('AnyThing', randomIndex, computerArray.value.length, computerArray.value)
   play(randomIndex, 'enemy');
 }
 

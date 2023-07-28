@@ -2,8 +2,6 @@
 import Logo from '../components/Logo.vue'
 import ButtonTemplate from '../components/Button.vue'
 import mainscreen from '../components/main.vue'
-import { getAllPokemon } from "../services/axios"
-import type { Pokedex } from '@/model/Pokemon';
 import pokeballSrc from '@/assets/design/pokeball.png';
 import pokedexSrc from '@/assets/design/pokedex.png';
 

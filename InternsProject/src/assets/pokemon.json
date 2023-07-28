@@ -1,5 +1,5 @@
-{
-    "pokedex": [
+
+    [
         {
             "num": 1,
             "name": "Bulbasaur",
@@ -32180,4 +32180,3 @@
             "link": "https://pokemondb.net/pokedex/melmetal"
         }
     ]
-}

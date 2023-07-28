@@ -1,6 +1,6 @@
-export interface Pokedex {
-    pokedex: Pokemon[]
-}
+// export interface Pokedex {
+//     pokedexArray: Pokemon[]
+// }
 
 export interface Pokemon {
     num: number;
