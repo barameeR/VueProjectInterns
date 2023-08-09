@@ -52,7 +52,7 @@ import { getAllPokemon } from "../services/axios"
 import pokeball from "../assets/design/stage.png";
 import { type Pokemon } from '@/model/Pokemon';
 // import JSConfetti from 'js-confetti'
-import fetchDataFromJson from '@/services/fetchDataFromProject'
+// import fetchDataFromJson from '@/services/fetchDataFromProject'
 
 // const confetti = new JSConfetti();
 
@@ -75,7 +75,7 @@ function gameInit() {
   fetchPlayerAndComputerArrays();
 }
 
-const resetGameValue = () =>{
+const resetGameValue = () => {
   playArea.value = [];
   isButtonActive.value = false;
   result.value = "";
@@ -87,12 +87,12 @@ const fetchPlayerAndComputerArrays = async (): Promise<void> => {
   try {
     let path: string = "@/assets/pokemon.json";
     let pokemonData: Pokemon[];
-    pokemonData = await fetchDataFromJson();
+    // pokemonData = await fetchDataFromJson();
     // console.log("Pokemon data from Json",pokemonData.pokedex)
     // pokemonData = await getAllPokemon();
-    
+
     // if (process.env.NODE_ENV === 'development') {
-    //   pokemonData = await getAllPokemon();
+    pokemonData = await getAllPokemon();
     // } else {
     //   pokemonData = await fetchDataFromJson(path);
     // }
@@ -118,7 +118,7 @@ function calculatePower(partition: any[]) {
 
 function chooseTwoArrays(data: Pokemon[]) {
   let shuffledData = shuffleArray(data);
-  console.log("Shuffle",shuffledData)
+  console.log("Shuffle", shuffledData)
 
   const arraySize = 5;
   let partition1 = shuffledData.slice(0, arraySize);
