@@ -1,24 +1,15 @@
 import axios from 'axios';
 import { type Pokemon } from "../model/Pokemon"
+import vueAppConfig from '../config'; // Adjust the path based on your project's structure
+
 export async function getAllPokemon(): Promise<Pokemon[]> {
     try {
-        const response = await axios.get<Pokemon[]>('http://ec2-3-27-4-172.ap-southeast-2.compute.amazonaws.com:8080/pokemon');
+        const response = await axios.get<Pokemon[]>(vueAppConfig.EC2_BASE_URL);
         console.log("Baramee",response.data as Pokemon[]);
         return response.data as Pokemon[];
     } catch (error) {
-                console.error('Error fetching Pokémon data:', "error message here");
-        throw error;
-    }
-}
-
-export const getPokemonById = async (id :number): Promise<Pokemon[]> => {
-    try {
-        let url = `http://ec2-3-27-4-172.ap-southeast-2.compute.amazonaws.com:8080/pokemon?num=`+id
-        const response = await axios.get<Pokemon[]>(url);
-        return response.data;
-    } catch (error) {
+        alert("Make sure to change the EC2_BASE_URL if its already done, then there's some other issue (check console)");
         console.error('Error fetching Pokémon data:', "error message here");
         throw error;
     }
-  
 }
