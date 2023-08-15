@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import type { Pokemon } from '@/model/Pokemon';
+import vueAppConfig from '../config'; 
 
 const emit = defineEmits();
 const show = ref(false)
@@ -57,8 +58,10 @@ const toggleButtonActive = () => {
 
 onMounted(async () => {
   try {
-    const imageModule = await import(`@/assets/images/${pokemonName}.jpg`);
-    const imageFile = imageModule.default;
+    // TODO:: BASE URL from EC2 to be entered here
+
+    const imageModule = await (vueAppConfig.EC2_BASE_URL + `/images/${pokemonName}.jpg`);
+    const imageFile = imageModule;
 
     imageSrc.value = imageFile;
   } catch (error: any) {

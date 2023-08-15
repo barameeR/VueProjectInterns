@@ -1,4 +1,10 @@
 {
+  "compilerOptions": {
+    // Other options...
+    "types": [
+      "node"
+    ]
+  },
   "files": [],
   "references": [
     {

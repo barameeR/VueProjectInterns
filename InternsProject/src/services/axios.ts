@@ -6,7 +6,7 @@ export async function getAllPokemon(): Promise<Pokemon[]> {
         console.log("Baramee",response.data as Pokemon[]);
         return response.data as Pokemon[];
     } catch (error) {
-        console.error('Error fetching Pokémon data:', "error message here");
+                console.error('Error fetching Pokémon data:', "error message here");
         throw error;
     }
 }
